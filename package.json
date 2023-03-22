@@ -2,6 +2,9 @@
   "name": "solid-node-api",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "test": "vitest"
+  },
   "license": "MIT",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.43.0",
