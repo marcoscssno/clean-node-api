@@ -1,10 +1,14 @@
 import { assert, describe, expect, it } from 'vitest'
-import { User } from './User'
+import { User, UserProps } from './User'
 
 describe('User class', () => {
     it('should be created', () => {
-        const name = "Marcos"
-        const user: User = new User(name);
-        expect(user.name).toEqual(name)
+        const userProps = {
+            name: 'Marcos',
+            email: 'marcos@example.com',
+            encryptedPassword: 'somePassword'
+        };
+        const user: User = new User(userProps);
+        expect(user.getName()).toEqual(userProps.name)
     })
 })

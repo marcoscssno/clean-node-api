@@ -1,9 +1,19 @@
+export type UserProps = {
+    id: string,
+    name: string,
+    email: string,
+    encryptedPassword: string
+}
+
 export class User {
-    private _name: string;
-    constructor(name: string) {
-        this._name = name;
-    };
-    public get name() {
-        return this._name;
+    private readonly id: string;
+    private name: string;
+    private email: string;
+    private encryptedPassword: string;
+    constructor(props: Omit<UserProps, "id">, id?: string) {
+        Object.assign(this, props)
+    }
+    public getName(): string {
+        return this.name;
     }
 }
