@@ -3,7 +3,13 @@ import { User } from "../../entity/User";
 import { UserRepositoryInterface } from "../UserRepositoryInterface";
 import { InMemoryUserRepository } from './InMemoryUserRepository'
 
-describe('In Memory User Repository', () => {
+describe('In Memory User Repository', async () => {
+    it('should return empty array if there is no users', async () => {
+        const sut = new InMemoryUserRepository();
+        const inMemoryUsers = await sut.getAllUsers();
+        expect(inMemoryUsers).toEqual([]);
+    })
+
     it('should create an user', async () => {
         const user = new User({
             name: 'Marcos',
