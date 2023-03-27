@@ -15,5 +15,8 @@
     "eslint-plugin-promise": "^6.0.0",
     "typescript": "*",
     "vitest": "^0.29.7"
+  },
+  "dependencies": {
+    "uuid": "^9.0.0"
   }
 }
