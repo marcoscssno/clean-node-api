@@ -1,5 +1,5 @@
-import { assert, describe, expect, it } from 'vitest'
-import { User, UserProps } from './User'
+import { describe, expect, it } from 'vitest'
+import { User } from './User'
 
 describe('User class', () => {
     it('should be created', () => {

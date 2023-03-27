@@ -10,7 +10,7 @@ export class User {
     private name: string;
     private email: string;
     private encryptedPassword: string;
-    constructor(props: Omit<UserProps, "id">, id?: string) {
+    constructor(props: Omit<UserProps, 'id'>, id?: string) {
         Object.assign(this, props)
     }
     public getName(): string {

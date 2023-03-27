@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import { CreateUserRequestDTO } from './createUserRequestDTO'
 import { CreateUserUseCase } from './createUser'
+import { InMemoryUserRepository } from '../repository/implementation/InMemoryUserRepository'
+
+const userRepository = new InMemoryUserRepository();
 
 describe('Create user use case', () => {
     it('should create an user', async () => {
@@ -9,7 +12,9 @@ describe('Create user use case', () => {
             email: 'marcos@example.com',
             encryptedPassword: 'somePassword'
         }
-        const sut = await new CreateUserUseCase().execute(data);
-        expect(sut.name).toEqual(data.name);
+        const sut = new CreateUserUseCase(userRepository);
+        await sut.execute(data);
+        const users = await userRepository.getAllUsers();
+        expect(users[0].getName()).toEqual(data.name)
     })
 })
