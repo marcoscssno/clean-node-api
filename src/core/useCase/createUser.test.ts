@@ -15,6 +15,7 @@ describe('Create user use case', () => {
         const sut = new CreateUserUseCase(userRepository);
         await sut.execute(data);
         const users = await userRepository.getAllUsers();
+        console.log(users);
         expect(users[0].getName()).toEqual(data.name)
     })
 })

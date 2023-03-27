@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export type UserProps = {
     id: string,
     name: string,
@@ -13,7 +15,7 @@ export class User {
     constructor(props: Omit<UserProps, 'id'>, id?: string) {
         Object.assign(this, props);
         if(!id) {
-            this.id = 'a1b2c3';
+            this.id = uuidv4();
         }
     }
     public getName(): string {
