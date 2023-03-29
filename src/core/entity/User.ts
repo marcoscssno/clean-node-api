@@ -1,11 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-export type UserProps = {
-    id: string,
-    name: string,
-    email: string,
-    encryptedPassword: string
-}
+import UserProps from './UserProps';
 
 export class User {
     private readonly id: string;
