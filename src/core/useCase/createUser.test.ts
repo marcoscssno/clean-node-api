@@ -3,12 +3,12 @@ import { CreateUserRequestDTO } from './createUserRequestDTO'
 import { CreateUserUseCase } from './createUserUseCase'
 import { InMemoryUserRepository } from '../repository/implementation/InMemoryUserRepository'
 import PasswordEncryptorInterface from '../lib/passwordEncryptor/PasswordEncryptorInterface';
-import PasswordEncryptor from '../lib/passwordEncryptor/PasswordEncryptor';
+import BcryptPasswordEncryptor from '../lib/passwordEncryptor/BcryptPasswordEncryptor';
 import bcrypt from 'bcrypt';
 import { User } from '../entity/User';
 
 const userRepository = new InMemoryUserRepository();
-const passwordEncryptor: PasswordEncryptorInterface = new PasswordEncryptor();
+const passwordEncryptor: PasswordEncryptorInterface = new BcryptPasswordEncryptor();
 
 describe('Create user use case', () => {
     it('should create an user', async () => {
