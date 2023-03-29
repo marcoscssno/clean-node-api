@@ -1,4 +1,4 @@
-import { CreateUserUseCase } from "./createUser"
+import { CreateUserUseCase } from "./createUserUseCase"
 import { InMemoryUserRepository } from "../repository/implementation/InMemoryUserRepository";
 import { CreateUserController } from "./createUserController";
 

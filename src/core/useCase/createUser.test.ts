@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { CreateUserRequestDTO } from './createUserRequestDTO'
-import { CreateUserUseCase } from './createUser'
+import { CreateUserUseCase } from './createUserUseCase'
 import { InMemoryUserRepository } from '../repository/implementation/InMemoryUserRepository'
 
 const userRepository = new InMemoryUserRepository();
