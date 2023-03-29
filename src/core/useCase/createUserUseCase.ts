@@ -7,6 +7,11 @@ export class CreateUserUseCase {
         private userRepository: UserRepositoryInterface
     ) { }
     async execute(data: CreateUserRequestDTO): Promise<void> {
+        const { email } = data;
+        const userAlreadyExists = await this.userRepository.findByEmail(email);
+        if(userAlreadyExists) {
+            throw new Error('User already exists');
+        }
         const user: User = new User(data);
         await this.userRepository.save(user);
     }
