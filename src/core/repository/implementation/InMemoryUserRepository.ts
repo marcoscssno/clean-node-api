@@ -3,7 +3,7 @@ import { UserRepositoryInterface } from "../UserRepositoryInterface";
 
 export class InMemoryUserRepository implements UserRepositoryInterface {
     private users: User[] = [];
-    constructor() {}
+    constructor() { }
     async findByEmail(email: string): Promise<User | undefined> {
         const user = this.users.find(user => user.getEmail() === email);
         return user;

@@ -1,3 +1,3 @@
-export default interface PasswordEncryptorInterface {
+export interface PasswordEncryptorInterface {
     execute(password: string): Promise<string>
 }

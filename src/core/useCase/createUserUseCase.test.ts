@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest'
 import { CreateUserRequestDTO } from './createUserRequestDTO'
 import { CreateUserUseCase } from './createUserUseCase'
 import { InMemoryUserRepository } from '../repository/implementation/InMemoryUserRepository'
-import PasswordEncryptorInterface from '../lib/passwordEncryptor/PasswordEncryptorInterface';
-import BcryptPasswordEncryptor from '../lib/passwordEncryptor/BcryptPasswordEncryptor';
+import { PasswordEncryptorInterface } from '../lib/passwordEncryptor/PasswordEncryptorInterface';
+import { BcryptPasswordEncryptor } from '../lib/passwordEncryptor/BcryptPasswordEncryptor';
 
 const userRepository = new InMemoryUserRepository();
 const passwordEncryptor: PasswordEncryptorInterface = new BcryptPasswordEncryptor();
