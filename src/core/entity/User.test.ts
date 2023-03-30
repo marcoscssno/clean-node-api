@@ -1,14 +1,19 @@
 import { describe, expect, it } from 'vitest'
 import { User } from './User'
+import { validate as uuidValidate } from 'uuid';
 
-describe('User class', () => {
-    it('should be created', () => {
+describe('User Entity', () => {
+    it('should assign an id when no id is passed', () => {
         const userProps = {
             name: 'Marcos',
             email: 'marcos@example.com',
             encryptedPassword: 'somePassword'
         };
         const user: User = new User(userProps);
-        expect(user.getName()).toEqual(userProps.name)
+        const userId = user.getId();
+        expect(userId).not.toBe(null);
+        expect(userId).toBeTypeOf('string');
+        const userIdIsUuid = uuidValidate(userId);
+        expect(userIdIsUuid).toBeTruthy();
     })
 })

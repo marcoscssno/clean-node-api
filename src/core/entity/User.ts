@@ -13,6 +13,9 @@ export class User {
             this.id = uuidv4();
         }
     }
+    public getId(): string {
+        return this.id;
+    }
     public getName(): string {
         return this.name;
     }
@@ -21,8 +24,5 @@ export class User {
     }
     public getEncryptedPassword(): string {
         return this.encryptedPassword;
-    }
-    public setEncryptedPassword(encryptedPassword: string): void {
-        this.encryptedPassword = encryptedPassword;
     }
 }
