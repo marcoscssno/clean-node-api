@@ -4,8 +4,6 @@ import { CreateUserUseCase } from './createUserUseCase'
 import { InMemoryUserRepository } from '../repository/implementation/InMemoryUserRepository'
 import PasswordEncryptorInterface from '../lib/passwordEncryptor/PasswordEncryptorInterface';
 import BcryptPasswordEncryptor from '../lib/passwordEncryptor/BcryptPasswordEncryptor';
-import bcrypt from 'bcrypt';
-import { User } from '../entity/User';
 
 const userRepository = new InMemoryUserRepository();
 const passwordEncryptor: PasswordEncryptorInterface = new BcryptPasswordEncryptor();

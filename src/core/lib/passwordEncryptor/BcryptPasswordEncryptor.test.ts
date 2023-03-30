@@ -1,6 +1,4 @@
 import { describe, expect, it } from 'vitest';
-import { User } from '../../entity/User';
-import { CreateUserRequestDTO } from '../../useCase/createUserRequestDTO';
 import BcryptPasswordEncryptor from './BcryptPasswordEncryptor';
 import bcrypt from 'bcrypt';
 
