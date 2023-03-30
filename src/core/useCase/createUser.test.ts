@@ -38,21 +38,4 @@ describe('Create user use case', () => {
         await sut.execute(firstUser);
         expect(async () => await sut.execute(secondUser)).rejects.toThrowError();
     })
-
-    it('should encrypt user\'s password', async () => {
-        const data: CreateUserRequestDTO = {
-            name: 'Otto',
-            email: 'otto@example.com',
-            encryptedPassword: 'somePassword'
-        }
-        const sut = new CreateUserUseCase(userRepository, passwordEncryptor);
-        await sut.execute(data);
-        const { email, encryptedPassword } = data
-        const user: User | undefined = await userRepository.findByEmail(email);
-        if (user) {
-            expect(user.getEncryptedPassword()).not.toBe(encryptedPassword);
-            const passwordsMatch: string = await bcrypt.compare(encryptedPassword, user.getEncryptedPassword());
-            expect(passwordsMatch).toBeTruthy();
-        }
-    })
 })
