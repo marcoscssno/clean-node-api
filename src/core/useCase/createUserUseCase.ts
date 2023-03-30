@@ -14,9 +14,9 @@ export class CreateUserUseCase {
         if(userAlreadyExists) {
             throw new Error('User already exists');
         }
-        const user: User = new User(data);
         const { encryptedPassword } = data;
-        await this.passwordEncryptor.execute(user, encryptedPassword);
+        data.encryptedPassword = await this.passwordEncryptor.execute(encryptedPassword);
+        const user: User = new User(data);
         await this.userRepository.save(user);
     }
 }

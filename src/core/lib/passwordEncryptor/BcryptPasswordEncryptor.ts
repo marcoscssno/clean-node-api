@@ -1,4 +1,3 @@
-import { User } from "../../entity/User";
 import PasswordEncryptorInterface from "./PasswordEncryptorInterface";
 import bcrypt from 'bcrypt';
 
@@ -6,8 +5,8 @@ import bcrypt from 'bcrypt';
 const saltRounds = 12;
 
 export default class BcryptPasswordEncryptor implements PasswordEncryptorInterface {
-    async execute(user: User, password: string) {
+    async execute(password: string): Promise<string> {
         const encryptedPassword = await bcrypt.hash(password, saltRounds);
-        user.setEncryptedPassword(encryptedPassword);
+        return encryptedPassword;
     }
 }

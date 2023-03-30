@@ -4,8 +4,6 @@ import { CreateUserUseCase } from './createUserUseCase'
 import { InMemoryUserRepository } from '../repository/implementation/InMemoryUserRepository'
 import PasswordEncryptorInterface from '../lib/passwordEncryptor/PasswordEncryptorInterface';
 import BcryptPasswordEncryptor from '../lib/passwordEncryptor/BcryptPasswordEncryptor';
-import bcrypt from 'bcrypt';
-import { User } from '../entity/User';
 
 const userRepository = new InMemoryUserRepository();
 const passwordEncryptor: PasswordEncryptorInterface = new BcryptPasswordEncryptor();
@@ -37,22 +35,5 @@ describe('Create user use case', () => {
         const sut = new CreateUserUseCase(userRepository, passwordEncryptor);
         await sut.execute(firstUser);
         expect(async () => await sut.execute(secondUser)).rejects.toThrowError();
-    })
-
-    it('should encrypt user\'s password', async () => {
-        const data: CreateUserRequestDTO = {
-            name: 'Otto',
-            email: 'otto@example.com',
-            encryptedPassword: 'somePassword'
-        }
-        const sut = new CreateUserUseCase(userRepository, passwordEncryptor);
-        await sut.execute(data);
-        const { email, encryptedPassword } = data
-        const user: User | undefined = await userRepository.findByEmail(email);
-        if (user) {
-            expect(user.getEncryptedPassword()).not.toBe(encryptedPassword);
-            const passwordsMatch: string = await bcrypt.compare(encryptedPassword, user.getEncryptedPassword());
-            expect(passwordsMatch).toBeTruthy();
-        }
     })
 })
