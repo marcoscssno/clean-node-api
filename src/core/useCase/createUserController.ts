@@ -6,13 +6,13 @@ export class CreateUserController {
         private createUserUseCase: CreateUserUseCase
     ) { }
     async handle(request: Request, response: Response): Promise<Response> {
-        const { name, email, encryptedPassword } = request.body;
+        const { name, email, password } = request.body;
 
         try {
             await this.createUserUseCase.execute({
                 name,
                 email,
-                encryptedPassword
+                password
             })
 
             return response.status(201).send();
