@@ -13,7 +13,7 @@ describe('Create user use case', () => {
         const data: CreateUserRequestDTO = {
             name: 'Marcos',
             email: 'marcos@example.com',
-            encryptedPassword: 'somePassword'
+            password: 'somePassword'
         }
         const sut = new CreateUserUseCase(userRepository, passwordEncryptor);
         await sut.execute(data);
@@ -25,12 +25,12 @@ describe('Create user use case', () => {
         const firstUser: CreateUserRequestDTO = {
             name: 'Marcos',
             email: 'user@example.com',
-            encryptedPassword: 'somePassword'
+            password: 'somePassword'
         }
         const secondUser: CreateUserRequestDTO = {
             name: 'John Doe',
             email: 'user@example.com',
-            encryptedPassword: 'otherPassword'
+            password: 'otherPassword'
         }
         const sut = new CreateUserUseCase(userRepository, passwordEncryptor);
         await sut.execute(firstUser);
