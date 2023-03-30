@@ -1,5 +1,5 @@
 export default interface UserProps {
-    id: string,
+    id?: string,
     name: string,
     email: string,
     encryptedPassword: string
