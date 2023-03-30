@@ -7,7 +7,7 @@ export class User {
     private name: string;
     private email: string;
     private encryptedPassword: string;
-    constructor(props: Omit<UserProps, 'id'>, id?: string) {
+    constructor(props: UserProps, id?: string) {
         Object.assign(this, props);
         if(!id) {
             this.id = uuidv4();
