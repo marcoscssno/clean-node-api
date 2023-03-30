@@ -1,4 +1,4 @@
-export type CreateUserRequestDTO = {
+export interface CreateUserRequestDTO {
     name: string,
     email: string,
     password: string

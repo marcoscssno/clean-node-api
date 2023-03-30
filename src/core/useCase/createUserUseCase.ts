@@ -1,6 +1,6 @@
 import { User } from "../entity/User";
-import UserProps from "../entity/UserProps";
-import PasswordEncryptorInterface from "../lib/passwordEncryptor/PasswordEncryptorInterface";
+import { UserProps } from "../entity/UserProps";
+import { PasswordEncryptorInterface } from "../lib/passwordEncryptor/PasswordEncryptorInterface";
 import { UserRepositoryInterface } from "../repository/UserRepositoryInterface";
 import { CreateUserRequestDTO } from "./createUserRequestDTO";
 
@@ -12,7 +12,7 @@ export class CreateUserUseCase {
     async execute(data: CreateUserRequestDTO): Promise<void> {
         const { name, email, password } = data;
         const userAlreadyExists = await this.userRepository.findByEmail(email);
-        if(userAlreadyExists) {
+        if (userAlreadyExists) {
             throw new Error('User already exists');
         }
         const encryptedPassword = await this.passwordEncryptor.execute(password);

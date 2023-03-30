@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import UserProps from './UserProps';
+import { UserProps } from './UserProps';
 
 export class User {
     private readonly id: string;
@@ -9,7 +9,7 @@ export class User {
     private encryptedPassword: string;
     constructor(props: UserProps, id?: string) {
         Object.assign(this, props);
-        if(!id) {
+        if (!id) {
             this.id = uuidv4();
         }
     }
