@@ -7,6 +7,9 @@ class GetUserByIdUseCase {
         ) { }
 
     async execute(id: string): Promise<User | null> {
+        if(!this.userRepository) {
+            throw new Error('Repository was not specified');
+        }
         if(!id) {
             throw new Error('Id was not specified');
         }
