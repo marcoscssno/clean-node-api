@@ -15,6 +15,11 @@ class InMemoryUserRepository implements UserRepositoryInterface {
     async getAllUsers(): Promise<User[] | []> {
         return this.users;
     }
+
+    async getUserById(id: string): Promise<User | null> {
+        const user = this.users.find(user => user.getId() === id);
+        return user || null;
+    }
 }
 
 // Create a single instance of this repository for testing the API
