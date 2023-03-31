@@ -1,7 +1,7 @@
-import { User } from "../entity/User";
-import { UserProps } from "../entity/UserProps";
-import { PasswordEncryptorInterface } from "../lib/passwordEncryptor/PasswordEncryptorInterface";
-import { UserRepositoryInterface } from "../repository/UserRepositoryInterface";
+import { User } from "../../entity/user/User";
+import { UserProps } from "../../entity/user/UserProps";
+import { PasswordEncryptorInterface } from "../../lib/passwordEncryptor/PasswordEncryptorInterface";
+import { UserRepositoryInterface } from "../../repository/user/UserRepositoryInterface";
 import { CreateUserRequestDTO } from "./createUserRequestDTO";
 
 export class CreateUserUseCase {
