@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { User } from "../../entity/User";
+import { User } from "../../../entity/user/User";
 import { InMemoryUserRepository } from './InMemoryUserRepository'
 
 describe('In Memory User Repository', async () => {
