@@ -2,7 +2,9 @@ import { User } from "../../entity/user/User";
 import { UserRepositoryInterface } from "../../repository/user/UserRepositoryInterface";
 
 class GetUserByIdUseCase {
-    private userRepository: UserRepositoryInterface;
+    constructor(
+        private userRepository: UserRepositoryInterface
+        ) { }
 
     async execute(id: string): Promise<User | null> {
         if(!id) {
