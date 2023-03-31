@@ -1,7 +1,7 @@
 import { User } from "../../../entity/user/User";
 import { UserRepositoryInterface } from "../UserRepositoryInterface";
 
-export class InMemoryUserRepository implements UserRepositoryInterface {
+class InMemoryUserRepository implements UserRepositoryInterface {
     private users: User[] = [];
     constructor() { }
     async findByEmail(email: string): Promise<User | undefined> {
@@ -15,4 +15,13 @@ export class InMemoryUserRepository implements UserRepositoryInterface {
     async getAllUsers(): Promise<User[] | []> {
         return this.users;
     }
+}
+
+// Create a single instance of this repository for testing the API
+// Otherwise, it's data won't be available for different use cases.
+const inMemoryUserRepository = new InMemoryUserRepository();
+
+export {
+    InMemoryUserRepository,
+    inMemoryUserRepository
 }

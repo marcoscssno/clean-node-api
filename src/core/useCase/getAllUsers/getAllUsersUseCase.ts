@@ -7,9 +7,6 @@ export class GetAllUsersUseCase {
     ) { }
     async execute(): Promise<User[] | []> {
         const users = await this.userRepository.getAllUsers();
-        if (users.length > 0) {
-            return users;
-        }
-        return []
+        return users;
     }
 }

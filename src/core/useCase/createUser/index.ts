@@ -1,14 +1,13 @@
 import { CreateUserUseCase } from "./createUserUseCase"
-import { InMemoryUserRepository } from "../../repository/user/implementation/InMemoryUserRepository";
+import { inMemoryUserRepository } from "../../repository/user/implementation/InMemoryUserRepository";
 import { CreateUserController } from "./createUserController";
 import { PasswordEncryptorInterface } from "../../lib/passwordEncryptor/PasswordEncryptorInterface";
 import { BcryptPasswordEncryptor } from "../../lib/passwordEncryptor/BcryptPasswordEncryptor";
 
-const userRepository = new InMemoryUserRepository();
 const passwordEncryptor: PasswordEncryptorInterface = new BcryptPasswordEncryptor();
 
 const createUserUseCase = new CreateUserUseCase(
-    userRepository,
+    inMemoryUserRepository,
     passwordEncryptor
 );
 
