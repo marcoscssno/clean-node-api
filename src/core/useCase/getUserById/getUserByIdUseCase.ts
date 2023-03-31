@@ -13,7 +13,11 @@ class GetUserByIdUseCase {
         if(!id) {
             throw new Error('Id was not specified');
         }
-        return null;
+        const user = await this.userRepository.getUserById(id);
+        if (!user) {
+            return null
+        }
+        return user;
     }
 }
 
