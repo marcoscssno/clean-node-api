@@ -1,11 +1,9 @@
 import { GetAllUsersUseCase } from "./getAllUsersUseCase"
-import { InMemoryUserRepository } from "../../repository/user/implementation/InMemoryUserRepository";
+import { inMemoryUserRepository } from "../../repository/user/implementation/InMemoryUserRepository";
 import { GetAllUsersController } from "./getAllUsersController";
 
-const userRepository = new InMemoryUserRepository();
-
 const getAllUsersUseCase = new GetAllUsersUseCase(
-    userRepository
+    inMemoryUserRepository
 );
 
 const getAllUsersController = new GetAllUsersController(
