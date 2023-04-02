@@ -24,4 +24,14 @@ describe('Update User Use Case', () => {
         // @ts-expect-error
         await expect(async () => sut.execute(updatedUser)).rejects.toThrow();
     });
+    it('should throw error if no user is specified', async () => {
+        const userRepository = new InMemoryUserRepository();
+        const passwordEncryptor = new BcryptPasswordEncryptor();
+        const sut = new UpdateUserUseCase(userRepository, passwordEncryptor);
+        // @ts-expect-error
+        await expect(async () => sut.execute()).rejects.toThrow();
+        const someId = 'a1b2c3';
+        // @ts-expect-error
+        await expect(async () => sut.execute(someId)).rejects.toThrow();
+    });
 });
