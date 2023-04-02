@@ -17,7 +17,7 @@ class UpdateUserController {
             }
             await this.updateUserUseCase.execute(id, user);
 
-            return response.status(201).send();
+            return response.status(204).send();
         }
         catch (error) {
             return response.status(400).json({
