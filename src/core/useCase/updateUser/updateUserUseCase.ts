@@ -32,7 +32,11 @@ class UpdateUserUseCase {
             encryptedPassword
         }
         const updatedUser = new User(userProps);
-        this.userRepository.update(id, updatedUser);
+        try {
+            await this.userRepository.update(id, updatedUser);
+        } catch (error) {
+            throw new Error(error.message);
+        }
     }
 }
 
