@@ -60,5 +60,15 @@ describe('In Memory User Repository', async () => {
         expect(user?.getName()).toEqual(updatedUser.getName());
         expect(user?.getEmail()).toEqual(updatedUser.getEmail());
         expect(user?.getEncryptedPassword()).toEqual(updatedUser.getEncryptedPassword());
-    })
+    });
+    it('should throw error if user is not found', async () => {
+        const sut = new InMemoryUserRepository();
+        const someId = 'a1b2c3';
+        const updatedUser = new User({
+            name: 'Otto',
+            email: 'otto@example.com',
+            encryptedPassword: 'otherPassword'
+        });
+        await expect(async () => await sut.update(someId, updatedUser)).rejects.toThrow();
+    });
 })
