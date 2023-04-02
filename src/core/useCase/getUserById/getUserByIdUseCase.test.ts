@@ -38,10 +38,8 @@ describe('Get User By Id Use Case', async () => {
         const getAllUsersUseCase = new GetAllUsersUseCase(userRepository);
         const users = await getAllUsersUseCase.execute();
         const someId = users[0].getId();
-        console.log('someId ' + someId);
         const sut = new GetUserByIdUseCase(userRepository);
         const foundUser = await sut.execute(someId);
-        console.log(foundUser);
         const { name, email } = user;
         expect(foundUser).toContain({ name, email });
     })
