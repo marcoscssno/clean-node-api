@@ -25,4 +25,13 @@ export class User {
     public getEncryptedPassword(): string {
         return this.encryptedPassword;
     }
+    public setName(name: string): void {
+        this.name = name;
+    }
+    public setEmail(email: string): void {
+        this.email = email;
+    }
+    public setEncryptedPassword(encryptedPassword: string): void {
+        this.encryptedPassword = encryptedPassword;
+    }
 }
