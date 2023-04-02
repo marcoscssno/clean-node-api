@@ -1,6 +1,7 @@
 import { it, expect, describe } from 'vitest';
 import { UpdateUserUseCase } from './updateUserUseCase';
 import { InMemoryUserRepository } from '../../repository/user/implementation/InMemoryUserRepository';
+import { BcryptPasswordEncryptor } from '../../lib/passwordEncryptor/BcryptPasswordEncryptor';
 import { User } from '../../entity/user/User';
 
 describe('Update User Use Case', () => {
@@ -11,7 +12,8 @@ describe('Update User Use Case', () => {
     });
     it('should throw error if no id is specified', async () => {
         const userRepository = new InMemoryUserRepository();
-        const sut = new UpdateUserUseCase(userRepository);
+        const passwordEncryptor = new BcryptPasswordEncryptor();
+        const sut = new UpdateUserUseCase(userRepository, passwordEncryptor);
         // @ts-expect-error
         await expect(async () => sut.execute()).rejects.toThrow();
         const updatedUser = new User({
