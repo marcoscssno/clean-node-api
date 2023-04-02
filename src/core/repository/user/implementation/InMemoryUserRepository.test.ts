@@ -33,6 +33,14 @@ describe('In Memory User Repository', async () => {
         // @ts-expect-error
         await expect(async () => await sut.update(updatedUser)).rejects.toThrow();
     });
+    it('should not update if no user is specified', async () => {
+        const sut = new InMemoryUserRepository();
+        const someId = 'a1b2c3';
+        // @ts-expect-error
+        await expect(async () => await sut.update()).rejects.toThrow();
+        // @ts-expect-error
+        await expect(async () => await sut.update(someId)).rejects.toThrow();
+    });
     it('should update user properties', async () => {
         const newUser = new User({
             name: 'Marcos',
