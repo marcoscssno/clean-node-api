@@ -40,4 +40,19 @@ describe('In Memory User Repository', async () => {
         expect(user?.getEmail()).toEqual(updatedUser.getEmail());
         expect(user?.getEncryptedPassword()).toEqual(updatedUser.getEncryptedPassword());
     });
+    it('should delete an user', async () => {
+        const user = new User({
+            name: 'Jane',
+            email: 'jane@example.com',
+            encryptedPassword: 'otherPassword'
+        });
+        const sut = new InMemoryUserRepository();
+        await sut.save(user);
+        const inMemoryUsers = await sut.getAllUsers();
+        const inMemoryUser = inMemoryUsers[0];
+        expect(inMemoryUser).toEqual(user);
+        const id = inMemoryUser.getId();
+        await sut.delete(id);
+        expect(inMemoryUsers).not.toContain(user);
+    })
 })
