@@ -29,6 +29,16 @@ class InMemoryUserRepository implements UserRepositoryInterface {
             targetUser?.setEncryptedPassword(user.getEncryptedPassword());
         }
     }
+
+    async delete(id: string): Promise<void> {
+        const targetUser = user => user.id === id;
+        const targetUserIndex = this.users.findIndex(targetUser);
+        const targetUserExists = targetUserIndex >= 0;
+        if(!targetUserExists) {
+            throw new Error('User not found');
+        }
+        this.users.splice(targetUserIndex, 1);
+    }
 }
 
 // Create a single instance of this repository for testing the API
