@@ -24,6 +24,10 @@ class UpdateUserUseCase {
         if(typeof(user) !== 'object') {
             throw new Error('Invalid user type');
         }
+        const userExists = await this.userRepository.getUserById(id);
+        if(!userExists) {
+            throw new Error('User not found');
+        }
         const { name, email, password } = user;
         const encryptedPassword = await this.passwordEncryptor.execute(password);
         const userProps = {
@@ -32,11 +36,7 @@ class UpdateUserUseCase {
             encryptedPassword
         }
         const updatedUser = new User(userProps);
-        try {
-            await this.userRepository.update(id, updatedUser);
-        } catch (error) {
-            throw new Error(error.message);
-        }
+        await this.userRepository.update(id, updatedUser);
     }
 }
 
