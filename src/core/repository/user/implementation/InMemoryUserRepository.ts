@@ -22,25 +22,12 @@ class InMemoryUserRepository implements UserRepositoryInterface {
     }
 
     async update(id: string, user: User): Promise<void> {
-        if(!id) {
-            throw new Error('Id was not specified');
-        }
-        if(typeof(id) !== 'string') {
-            throw new Error('Invalid id type');
-        }
-        if(!user) {
-            throw new Error('User was not specified');
-        }
-        if(typeof(user) !== 'object') {
-            throw new Error('Invalid user type');
-        }
         const targetUser = this.users.find(user => user.getId() === id);
-        if(!targetUser) {
-            throw new Error('User was not found');
+        if(targetUser) {
+            targetUser?.setName(user.getName());
+            targetUser?.setEmail(user.getEmail());
+            targetUser?.setEncryptedPassword(user.getEncryptedPassword());
         }
-        targetUser?.setName(user.getName());
-        targetUser?.setEmail(user.getEmail());
-        targetUser?.setEncryptedPassword(user.getEncryptedPassword());
     }
 }
 
