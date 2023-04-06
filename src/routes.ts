@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { createUserController } from "./core/useCase/createUser";
+import { deleteUserController } from "./core/useCase/deleteUser";
 import { getAllUsersController } from "./core/useCase/getAllUsers";
 import { getUserByIdController } from "./core/useCase/getUserById";
 import { updateUserController } from "./core/useCase/updateUser";
@@ -20,6 +21,10 @@ router.get('/user/:id', async (request, response) => {
 
 router.put('/user/:id', async (request, response) => {
     return updateUserController.handle(request, response);
+});
+
+router.delete('/user/:id', async (request, response) => {
+    return deleteUserController.handle(request, response);
 });
 
 export { router }
