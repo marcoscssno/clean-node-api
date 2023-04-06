@@ -42,7 +42,16 @@ describe('Delete User Use Case', () => {
         const id = users[0].getId();
 
         await sut.execute(id);
-        
+
         expect(users).not.toContainEqual(users[0]);
+    });
+
+    it('should throw error if no user is specified', async () => {
+        const { sut } = makeSut();
+
+        // @ts-expect-error
+        const deleteWithNoId = await sut.execute();
+        
+        expect(async () => deleteWithNoId).rejects.toThrow();
     });
 });
