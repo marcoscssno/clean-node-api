@@ -50,8 +50,6 @@ describe('Delete User Use Case', () => {
         const { sut } = makeSut();
 
         // @ts-expect-error
-        const deleteWithNoId = await sut.execute();
-        
-        expect(async () => deleteWithNoId).rejects.toThrow();
+        expect(async () => await sut.execute()).rejects.toThrow();
     });
 });
