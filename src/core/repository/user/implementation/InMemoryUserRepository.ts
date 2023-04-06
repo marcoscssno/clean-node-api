@@ -31,13 +31,12 @@ class InMemoryUserRepository implements UserRepositoryInterface {
     }
 
     async delete(id: string): Promise<void> {
-        const targetUser = user => user.id === id;
+        const targetUser = user => user.getId() === id;
         const targetUserIndex = this.users.findIndex(targetUser);
         const targetUserExists = targetUserIndex >= 0;
-        if(!targetUserExists) {
-            throw new Error('User not found');
+        if(targetUserExists) {
+            this.users.splice(targetUserIndex, 1);
         }
-        this.users.splice(targetUserIndex, 1);
     }
 }
 
