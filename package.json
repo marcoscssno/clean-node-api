@@ -5,6 +5,7 @@
   "scripts": {
     "start": "tsnd --transpile-only --respawn --ignore-watch node_modules src/server.ts",
     "test": "vitest run",
+    "test:watch": "vitest watch",
     "coverage": "vitest run --coverage"
   },
   "license": "MIT",
