@@ -1,10 +1,10 @@
 import { it, expect, describe } from 'vitest';
-import { InMemoryUserRepository } from '../../repository/user/implementation/InMemoryUserRepository';
-import { GetUserByIdUseCase } from './getUserByIdUseCase';
-import { CreateUserUseCase } from '../createUser/createUserUseCase';
-import { BcryptPasswordEncryptor } from '../../lib/passwordEncryptor/BcryptPasswordEncryptor'
-import { CreateUserRequestDTO } from '../createUser/createUserRequestDTO';
-import { GetAllUsersUseCase } from '../getAllUsers/getAllUsersUseCase';
+import { InMemoryUserRepository } from '@repository/user/implementation/InMemoryUserRepository';
+import { GetUserByIdUseCase } from '@useCase/getUserById/getUserByIdUseCase';
+import { CreateUserUseCase } from '@useCase/createUser/createUserUseCase';
+import { BcryptPasswordEncryptor } from '@lib/passwordEncryptor/BcryptPasswordEncryptor'
+import { CreateUserRequestDTO } from '@useCase/createUser/createUserRequestDTO';
+import { GetAllUsersUseCase } from '@useCase/getAllUsers/getAllUsersUseCase';
 
 describe('Get User By Id Use Case', async () => {
     it('should throw an error if no repository is specified', async () => {

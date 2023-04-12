@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { User } from './User'
+import { User } from '@entity/user/User';
 import { validate as uuidValidate } from 'uuid';
 
 describe('User Entity', () => {

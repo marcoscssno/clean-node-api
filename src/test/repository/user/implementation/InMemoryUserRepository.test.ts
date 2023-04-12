@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { User } from "../../../entity/user/User";
-import { InMemoryUserRepository } from './InMemoryUserRepository';
+import { User } from "@entity/user/User";
+import { InMemoryUserRepository } from '@repository/user/implementation/InMemoryUserRepository';
 
 describe('In Memory User Repository', async () => {
     it('should return empty array if there is no users', async () => {

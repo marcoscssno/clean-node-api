@@ -1,9 +1,9 @@
 import { it, expect, describe } from 'vitest';
-import { BcryptPasswordEncryptor } from '../../lib/passwordEncryptor/BcryptPasswordEncryptor';
-import { InMemoryUserRepository } from '../../repository/user/implementation/InMemoryUserRepository';
-import { CreateUserRequestDTO } from '../createUser/createUserRequestDTO';
-import { CreateUserUseCase } from '../createUser/createUserUseCase';
-import { GetAllUsersUseCase } from './getAllUsersUseCase';
+import { BcryptPasswordEncryptor } from '@lib/passwordEncryptor/BcryptPasswordEncryptor';
+import { InMemoryUserRepository } from '@repository/user/implementation/InMemoryUserRepository';
+import { CreateUserRequestDTO } from '@useCase/createUser/createUserRequestDTO';
+import { CreateUserUseCase } from '@useCase/createUser/createUserUseCase';
+import { GetAllUsersUseCase } from '@useCase/getAllUsers/getAllUsersUseCase';
 
 describe('Get All Users Use Case', () => {
     it('should return an empty array when there are no users', async () => {
