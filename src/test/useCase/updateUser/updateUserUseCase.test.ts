@@ -1,10 +1,10 @@
 import { it, expect, describe } from 'vitest';
-import { UpdateUserUseCase } from './updateUserUseCase';
-import { InMemoryUserRepository } from '../../repository/user/implementation/InMemoryUserRepository';
-import { CreateUserUseCase } from '../createUser/createUserUseCase';
-import { BcryptPasswordEncryptor } from '../../lib/passwordEncryptor/BcryptPasswordEncryptor';
-import { GetAllUsersUseCase } from '../getAllUsers/getAllUsersUseCase';
-import { User } from '../../entity/user/User';
+import { UpdateUserUseCase } from '@useCase/updateUser/updateUserUseCase';
+import { InMemoryUserRepository } from '@repository/user/implementation/InMemoryUserRepository';
+import { CreateUserUseCase } from '@useCase/createUser/createUserUseCase';
+import { BcryptPasswordEncryptor } from '@lib/passwordEncryptor/BcryptPasswordEncryptor';
+import { GetAllUsersUseCase } from '@useCase/getAllUsers/getAllUsersUseCase';
+import { User } from '@entity/user/User';
 
 describe('Update User Use Case', () => {
     it('should throw error if no repository is specified', async () => {

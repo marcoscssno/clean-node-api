@@ -1,10 +1,10 @@
 import { it, expect, describe } from 'vitest';
-import { DeleteUserUseCase } from './deleteUserUseCase';
-import { InMemoryUserRepository } from '../../repository/user/implementation/InMemoryUserRepository';
-import { CreateUserUseCase } from '../createUser/createUserUseCase';
-import { BcryptPasswordEncryptor } from '../../lib/passwordEncryptor/BcryptPasswordEncryptor';
-import { GetAllUsersUseCase } from '../getAllUsers/getAllUsersUseCase';
-import { User } from '../../entity/user/User';
+import { DeleteUserUseCase } from '@useCase/deleteUser/deleteUserUseCase';
+import { InMemoryUserRepository } from '@repository/user/implementation/InMemoryUserRepository';
+import { CreateUserUseCase } from '@useCase/createUser/createUserUseCase';
+import { BcryptPasswordEncryptor } from '@lib/passwordEncryptor/BcryptPasswordEncryptor';
+import { GetAllUsersUseCase } from '@useCase/getAllUsers/getAllUsersUseCase';
+import { User } from '@entity/user/User';
 
 const makeSut = () => {
     const userRepository = new InMemoryUserRepository();

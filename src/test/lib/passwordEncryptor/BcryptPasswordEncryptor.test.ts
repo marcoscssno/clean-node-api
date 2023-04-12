@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { BcryptPasswordEncryptor } from './BcryptPasswordEncryptor';
+import { BcryptPasswordEncryptor } from '@lib/passwordEncryptor/BcryptPasswordEncryptor';
 import bcrypt from 'bcrypt';
 
 describe('Bcrypt Password Encryptor', async () => {
