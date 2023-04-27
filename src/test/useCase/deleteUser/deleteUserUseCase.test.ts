@@ -1,44 +1,34 @@
 import { it, expect, describe } from 'vitest';
 import { DeleteUserUseCase } from '@useCase/deleteUser/deleteUserUseCase';
 import { InMemoryUserRepository } from '@repository/user/implementation/InMemoryUserRepository';
-import { CreateUserUseCase } from '@useCase/createUser/createUserUseCase';
-import { BcryptPasswordEncryptor } from '@lib/passwordEncryptor/BcryptPasswordEncryptor';
-import { GetAllUsersUseCase } from '@useCase/getAllUsers/getAllUsersUseCase';
 import { User } from '@entity/user/User';
 
+const userRepository = new InMemoryUserRepository();
+
 const makeSut = () => {
-    const userRepository = new InMemoryUserRepository();
-    const passwordEncryptor = new BcryptPasswordEncryptor();
-    const createUserUseCase = new CreateUserUseCase(userRepository, passwordEncryptor);
-    const getAllUsersUseCase = new GetAllUsersUseCase(userRepository);
     const sut = new DeleteUserUseCase(userRepository);
-    return {
-        userRepository,
-        createUserUseCase,
-        getAllUsersUseCase,
-        sut
-    };
+    return sut;
 };
 
-const createUser = async (createUserUseCase): Promise<void> => {
-    const user = {
+const createUser = async (): Promise<void> => {
+    const user = new User ({
         name: 'Marcos',
         email: 'marcos@example.com',
-        password: 'somePassword'
-    };
-    await createUserUseCase.execute(user);
+        encryptedPassword: 'someEncryptedPassword'
+    });
+    await userRepository.save(user);
 };
 
-const getAllUsers = async (getAllUsersUseCase): Promise<User[] | []> => {
-    const users = await getAllUsersUseCase.execute();
+const getAllUsers = async (): Promise<User[] | []> => {
+    const users = await userRepository.getAllUsers();
     return users;
 }
 
 describe('Delete User Use Case', () => {
     it('should delete an user', async () => {
-        const { createUserUseCase, getAllUsersUseCase, sut } = makeSut();
-        await createUser(createUserUseCase);
-        const users = await getAllUsers(getAllUsersUseCase);
+        const sut = makeSut();
+        await createUser();
+        const users = await getAllUsers();
         const id = users[0].getId();
 
         await sut.execute(id);
@@ -47,7 +37,7 @@ describe('Delete User Use Case', () => {
     });
 
     it('should throw error if no user is specified', async () => {
-        const { sut } = makeSut();
+        const sut = makeSut();
 
         // @ts-expect-error
         expect(async () => await sut.execute()).rejects.toThrow();
