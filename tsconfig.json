@@ -6,6 +6,7 @@
             "@lib/*": ["core/lib/*"],
             "@repository/*": ["core/repository/*"],
             "@useCase/*": ["core/useCase/*"],
-        }
+        },
+        "esModuleInterop": true
     }
 }
