@@ -1,46 +1,56 @@
 import { it, expect, describe } from 'vitest';
 import { InMemoryUserRepository } from '@repository/user/implementation/InMemoryUserRepository';
 import { GetUserByIdUseCase } from '@useCase/getUserById/getUserByIdUseCase';
-import { CreateUserUseCase } from '@useCase/createUser/createUserUseCase';
-import { BcryptPasswordEncryptor } from '@lib/passwordEncryptor/BcryptPasswordEncryptor'
-import { CreateUserRequestDTO } from '@useCase/createUser/createUserRequestDTO';
-import { GetAllUsersUseCase } from '@useCase/getAllUsers/getAllUsersUseCase';
+import { User } from '@entity/user/User';
+
+const userRepository = new InMemoryUserRepository();
+const makeSut = () => {
+    const sut = new GetUserByIdUseCase(userRepository);
+    return sut;
+};
 
 describe('Get User By Id Use Case', async () => {
     it('should throw an error if no repository is specified', async () => {
         // @ts-expect-error
         const sut = new GetUserByIdUseCase();
         const someId: string = 'a1b2c3';
-        expect(async () => sut.execute(someId)).rejects.toThrow();
+        
+        expect(async () => await sut.execute(someId)).rejects.toThrow();
     });
-    it('should ensure an id is passed', () => {
-        const userRepository = new InMemoryUserRepository();
-        const sut = new GetUserByIdUseCase(userRepository);
+
+    it('should ensure an id is passed', async () => {
+        const sut = makeSut();
+
         // @ts-expect-error
-        expect(sut.execute()).rejects.toThrow();
+        const getUserById = async () => await sut.execute();
+
+        expect(async () => getUserById()).rejects.toThrow();
     });
+
     it('should return null if no user is found with provided id', async () => {
-        const userRepository = new InMemoryUserRepository();
-        const sut = new GetUserByIdUseCase(userRepository);
+        const sut = makeSut();
         const someId: string = 'a1b2c3';
-        expect(sut.execute(someId)).resolves.toBeNull();
+
+        const user = await sut.execute(someId);
+
+        expect(user).toBeNull();
     });
+
     it('should return an user if found', async () => {
-        const userRepository = new InMemoryUserRepository();
-        const passwordEncryptor = new BcryptPasswordEncryptor();
-        const createUserUseCase = new CreateUserUseCase(userRepository, passwordEncryptor);
-        const user: CreateUserRequestDTO = {
+        const sut = makeSut();
+        const user = new User ({
             name: 'Marcos',
             email: 'marcos@example.com',
-            password: 'somePassword'
-        }
-        await createUserUseCase.execute(user);
-        const getAllUsersUseCase = new GetAllUsersUseCase(userRepository);
-        const users = await getAllUsersUseCase.execute();
+            encryptedPassword: 'somePassword'
+        });
+        await userRepository.save(user);
+        const users = await userRepository.getAllUsers();
         const someId = users[0].getId();
-        const sut = new GetUserByIdUseCase(userRepository);
+        const name = user.getName();
+        const email = user.getEmail();
+        
         const foundUser = await sut.execute(someId);
-        const { name, email } = user;
+
         expect(foundUser).toContain({ name, email });
-    })
+    });
 });
