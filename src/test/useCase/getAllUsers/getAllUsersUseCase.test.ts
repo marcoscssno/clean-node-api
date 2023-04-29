@@ -1,37 +1,42 @@
 import { it, expect, describe } from 'vitest';
-import { BcryptPasswordEncryptor } from '@lib/passwordEncryptor/BcryptPasswordEncryptor';
 import { InMemoryUserRepository } from '@repository/user/implementation/InMemoryUserRepository';
-import { CreateUserRequestDTO } from '@useCase/createUser/createUserRequestDTO';
-import { CreateUserUseCase } from '@useCase/createUser/createUserUseCase';
 import { GetAllUsersUseCase } from '@useCase/getAllUsers/getAllUsersUseCase';
+import { User } from '@entity/user/User';
+
+const userRepository = new InMemoryUserRepository();
+
+const makeSut = () => {
+    const sut = new GetAllUsersUseCase(userRepository);
+    return sut;
+};
 
 describe('Get All Users Use Case', () => {
     it('should return an empty array when there are no users', async () => {
-        const userRepository = new InMemoryUserRepository();
-        const sut = new GetAllUsersUseCase(userRepository);
+        const sut = makeSut();
+        
         const users = await sut.execute();
+        
         expect(users).toEqual([]);
-    })
+    });
 
     it('should return all users when there are users', async () => {
-        const firstUser: CreateUserRequestDTO = {
+        const sut = makeSut();
+        const firstUser = new User({
             name: 'Marcos',
             email: 'marcos@example.com',
-            password: 'somePassword'
-        }
-        const secondUser: CreateUserRequestDTO = {
+            encryptedPassword: 'someEncryptedPassword'
+        });
+        const secondUser = new User({
             name: 'John Doe',
             email: 'johndoe@example.com',
-            password: 'otherPassword'
-        }
-        const userRepository = new InMemoryUserRepository();
-        const passwordEncryptor = new BcryptPasswordEncryptor();
-        const createUserUseCase = new CreateUserUseCase(userRepository, passwordEncryptor);
-        await createUserUseCase.execute(firstUser);
-        await createUserUseCase.execute(secondUser);
-        const sut = new GetAllUsersUseCase(userRepository);
+            encryptedPassword: 'otherEncryptedPassword'
+        });
         const users = await sut.execute();
+        
+        await userRepository.save(firstUser);
+        await userRepository.save(secondUser);
+        
         expect(users[0].getName()).toBe('Marcos');
         expect(users[1].getName()).toBe('John Doe');
-    })
-})
+    });
+});
